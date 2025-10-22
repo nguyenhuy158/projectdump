@@ -32,9 +32,14 @@ echo "🏗️ Building package..."
 python3 -m build
 
 echo ""
-read -p "Do you want to upload to TestPyPI (t) or real PyPI (r)? [t/r]: " TARGET
+read -p "Where to upload? TestPyPI (t), PyPI (r), or both (b)? [t/r/b]: " TARGET
 
 if [ "$TARGET" == "r" ]; then
+  echo "🚀 Uploading to PyPI..."
+  twine upload dist/*
+elif [ "$TARGET" == "b" ]; then
+  echo "🧪 Uploading to TestPyPI..."
+  twine upload --repository testpypi dist/*
   echo "🚀 Uploading to PyPI..."
   twine upload dist/*
 else
