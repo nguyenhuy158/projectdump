@@ -1,5 +1,13 @@
 #!/bin/bash
-set -e
+set -ex
+
+TWINE_CONFIG_FILE="$(pwd)/.pypirc"
+
+VENV_DIR=".venv"
+if [ ! -d "$VENV_DIR" ]; then
+  python3 -m venv "$VENV_DIR"
+fi
+source "$VENV_DIR/bin/activate"
 
 PROJECT_NAME="projectdump"
 
@@ -17,7 +25,8 @@ echo "🧹 Cleaning old builds..."
 rm -rf build dist *.egg-info
 
 echo "📦 Installing build tools..."
-pip install --upgrade build twine > /dev/null
+python3 -m ensurepip --upgrade > /dev/null 2>&1 || true
+python3 -m pip install --upgrade build twine > /dev/null
 
 echo "🏗️ Building package..."
 python3 -m build

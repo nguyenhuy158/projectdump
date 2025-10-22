@@ -1,3 +1,7 @@
 [pypi]
 username = __token__
 password = pypi-xxxxxxxxxxxxxxxx
+
+[testpypi]
+username = __token__
+password = pypi-xxxxxxxxxxxxxxxx
